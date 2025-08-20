@@ -63,6 +63,15 @@ class _ProductTileListViewState extends State<ProductTileListView> {
                   final productIndex = index ~/ 2;
                   return ProductTile(
                     product: products[productIndex],
+                    onLikeChanged: (isLiked) {
+                      setState(() {
+                        if (isLiked) {
+                          products[productIndex] = products[productIndex].copyWith(likes: products[productIndex].likes + 1);
+                        } else {
+                          products[productIndex] = products[productIndex].copyWith(likes: products[productIndex].likes - 1);
+                        }
+                      });
+                    },
                     onLongPress: () {
                       showDialog(
                         context: context,

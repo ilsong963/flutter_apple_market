@@ -4,9 +4,10 @@ import 'package:apple_market/util/formatter.dart';
 import 'package:flutter/material.dart';
 
 class BottomBar extends StatelessWidget {
-  const BottomBar({super.key, required this.product});
-
   final Product product;
+  final bool isLike;
+  final ValueChanged<bool> onLikeChanged;
+  const BottomBar({super.key, required this.product, required this.isLike, required this.onLikeChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class BottomBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          LikeButton(),
+          LikeButton(isLike: isLike, onLikeChanged: onLikeChanged),
           Text('${Formatter.formatPrice(product.price)} 원', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
           ElevatedButton(
             onPressed: () {},

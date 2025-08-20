@@ -4,14 +4,17 @@ import 'package:apple_market/util/formatter.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatelessWidget {
-  const DetailPage({super.key, required this.product});
   final Product product;
+  final bool isLike;
+  final ValueChanged<bool> onLikeChanged;
+  const DetailPage({super.key, required this.product, required this.isLike, required this.onLikeChanged});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("상품 상세")),
 
-      bottomNavigationBar: BottomBar(product: product),
+      bottomNavigationBar: BottomBar(product: product, isLike: isLike, onLikeChanged: onLikeChanged),
 
       body: SingleChildScrollView(
         child: Column(
