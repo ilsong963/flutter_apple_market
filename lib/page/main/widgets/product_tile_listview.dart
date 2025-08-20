@@ -16,19 +16,23 @@ class ProductTileListView extends ConsumerWidget {
       child: productState.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, stack) => Center(child: Text('에러 발생: $e')),
-        data:
-            (products) => ListView.builder(
-              controller: controller,
-              itemCount: products.length * 2 - 1,
-              itemBuilder: (context, index) {
-                if (index.isOdd) return const Divider(height: 20, color: Colors.grey);
+        data: (products) {
+          if (products.isEmpty) {
+            return const Center(child: Text('상품이 없습니다.'));
+          }
+          return ListView.builder(
+            controller: controller,
+            itemCount: products.length * 2 - 1,
+            itemBuilder: (context, index) {
+              if (index.isOdd) return const Divider(height: 20, color: Colors.grey);
 
-                final productIndex = index ~/ 2;
-                final product = products[productIndex];
+              final productIndex = index ~/ 2;
+              final product = products[productIndex];
 
-                return ProductTile(productId: product.id);
-              },
-            ),
+              return ProductTile(productId: product.id);
+            },
+          );
+        },
       ),
     );
   }
