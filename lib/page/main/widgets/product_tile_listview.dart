@@ -61,7 +61,37 @@ class _ProductTileListViewState extends State<ProductTileListView> {
                     return Divider(color: Colors.grey, height: 20);
                   }
                   final productIndex = index ~/ 2;
-                  return ProductTile(product: products[productIndex]);
+                  return ProductTile(
+                    product: products[productIndex],
+                    onLongPress: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text("상품 삭제"),
+                            content: Text("이 상품을 삭제하시겠습니까?"),
+                            actions: [
+                              TextButton(
+                                child: Text('취소'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              TextButton(
+                                child: Text('확인'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  setState(() {
+                                    products.removeAt(productIndex);
+                                  });
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                  );
                 },
               ),
     );

@@ -5,12 +5,14 @@ import '../../../models/product.dart';
 
 class ProductTile extends StatelessWidget {
   final Product product;
+  final Function() onLongPress;
 
-  const ProductTile({super.key, required this.product});
+  const ProductTile({super.key, required this.product, required this.onLongPress});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPage(product: product))),
+      onLongPress: onLongPress,
       child: SizedBox(
         height: 140,
         child: Card(
