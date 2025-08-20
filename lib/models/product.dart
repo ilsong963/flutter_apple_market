@@ -20,4 +20,28 @@ class Product {
     required this.likes,
     required this.chats,
   });
+
+  Product copyWith({
+    int? id,
+    String? imageFilename,
+    String? productName,
+    String? description,
+    String? seller,
+    int? price,
+    String? address,
+    int? likes,
+    int? chats,
+  }) {
+    return Product(
+      id: id ?? this.id,
+      imageFilename: imageFilename ?? this.imageFilename,
+      productName: productName ?? this.productName,
+      description: description ?? this.description,
+      seller: seller ?? this.seller,
+      price: price ?? this.price,
+      address: address ?? this.address,
+      likes: likes ?? this.likes,
+      chats: chats ?? this.chats,
+    );
+  }
 }
