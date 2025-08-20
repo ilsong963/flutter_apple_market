@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class ProductTileListView extends StatefulWidget {
-  const ProductTileListView({super.key});
+  const ProductTileListView({super.key, required this.controller});
+  final ScrollController controller;
 
   @override
   State<ProductTileListView> createState() => _ProductTileListViewState();
@@ -52,6 +53,7 @@ class _ProductTileListViewState extends State<ProductTileListView> {
           isLoading
               ? const Center(child: CircularProgressIndicator())
               : ListView.builder(
+                controller: widget.controller,
                 itemCount: products.length * 2 - 1,
                 itemBuilder: (context, index) {
                   //홀수 일때 구분선 추가
