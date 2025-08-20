@@ -10,7 +10,14 @@ class MainPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.grey[300],
         title: Text("르탄동"),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.notifications_none_outlined))],
+        actions: [
+          IconButton(
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('알림이 생성 되었습니다.'), duration: Duration(seconds: 3)));
+            },
+            icon: Icon(Icons.notifications_none_outlined),
+          ),
+        ],
       ),
       body: ProductTileListView(),
     );
