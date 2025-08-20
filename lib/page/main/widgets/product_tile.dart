@@ -1,3 +1,4 @@
+import 'package:apple_market/util/formatter.dart';
 import 'package:flutter/material.dart';
 import '../../../models/product.dart';
 
@@ -39,7 +40,7 @@ class ProductTile extends StatelessWidget {
     );
   }
 
-  Text productPrice() => Text('${product.price}원', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16));
+  Text productPrice() => Text('${Formatter.formatPrice(product.price)} 원', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16));
 
   Text productAdress() => Text(product.address, style: TextStyle(color: Colors.grey[600]));
 
