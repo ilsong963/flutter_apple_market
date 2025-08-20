@@ -14,26 +14,14 @@ class ProductTile extends StatefulWidget {
 }
 
 class _ProductTileState extends State<ProductTile> {
-  bool isLike = false;
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        await Navigator.push<bool>(
+        await Navigator.push(
           context,
           MaterialPageRoute(
-            builder:
-                (context) => DetailPage(
-                  product: widget.product,
-                  isLike: isLike,
-                  onLikeChanged: (value) {
-                    widget.onLikeChanged(value);
-                    setState(() {
-                      isLike = value;
-                    });
-                  },
-                ),
+            builder: (context) => DetailPage(product: widget.product, isLike: widget.product.isLike, onLikeChanged: widget.onLikeChanged),
           ),
         );
       },
@@ -61,7 +49,11 @@ class _ProductTileState extends State<ProductTile> {
                         children: [
                           productChat(),
                           const SizedBox(width: 8),
-                          Icon(isLike ? Icons.favorite : Icons.favorite_border, color: isLike ? Colors.red : Colors.grey, size: 16),
+                          Icon(
+                            widget.product.isLike ? Icons.favorite : Icons.favorite_border,
+                            color: widget.product.isLike ? Colors.red : Colors.grey,
+                            size: 16,
+                          ),
                           Text('${widget.product.likes}'),
                         ],
                       ),

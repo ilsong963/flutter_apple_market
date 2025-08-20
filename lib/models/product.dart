@@ -8,6 +8,7 @@ class Product {
   final String address; // 주소
   final int likes; // 좋아요
   final int chats; // 채팅
+  final bool isLike; // 좋아요 여부
 
   const Product({
     required this.id,
@@ -19,6 +20,7 @@ class Product {
     required this.address,
     required this.likes,
     required this.chats,
+    required this.isLike,
   });
 
   Product copyWith({
@@ -31,6 +33,7 @@ class Product {
     String? address,
     int? likes,
     int? chats,
+    bool? isLike,
   }) {
     return Product(
       id: id ?? this.id,
@@ -42,6 +45,7 @@ class Product {
       address: address ?? this.address,
       likes: likes ?? this.likes,
       chats: chats ?? this.chats,
+      isLike: isLike ?? this.isLike,
     );
   }
 }

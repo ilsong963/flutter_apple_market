@@ -37,6 +37,7 @@ class _ProductTileListViewState extends State<ProductTileListView> {
             address: row[6].toString(),
             likes: int.tryParse(row[7].toString()) ?? 0,
             chats: int.tryParse(row[8].toString()) ?? 0,
+            isLike: false,
           );
         }).toList();
     setState(() {
@@ -65,11 +66,10 @@ class _ProductTileListViewState extends State<ProductTileListView> {
                     product: products[productIndex],
                     onLikeChanged: (isLiked) {
                       setState(() {
-                        if (isLiked) {
-                          products[productIndex] = products[productIndex].copyWith(likes: products[productIndex].likes + 1);
-                        } else {
-                          products[productIndex] = products[productIndex].copyWith(likes: products[productIndex].likes - 1);
-                        }
+                        products[productIndex] = products[productIndex].copyWith(
+                          isLike: isLiked,
+                          likes: isLiked ? products[productIndex].likes + 1 : products[productIndex].likes - 1,
+                        );
                       });
                     },
                     onLongPress: () {
