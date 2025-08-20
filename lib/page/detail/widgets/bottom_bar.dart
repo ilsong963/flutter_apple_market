@@ -1,24 +1,24 @@
-import 'package:apple_market/models/product.dart';
 import 'package:apple_market/page/detail/widgets/like_button.dart';
+import 'package:apple_market/provider/product_notifier.dart';
 import 'package:apple_market/util/formatter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BottomBar extends StatelessWidget {
-  final Product product;
-  final bool isLike;
-  final ValueChanged<bool> onLikeChanged;
-  const BottomBar({super.key, required this.product, required this.isLike, required this.onLikeChanged});
+class BottomBar extends ConsumerWidget {
+  final int productId;
+  const BottomBar({super.key, required this.productId});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final product = ref.watch(productByIdProvider(productId));
     return Container(
       padding: EdgeInsets.all(20),
       color: Colors.white,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          LikeButton(isLike: isLike, onLikeChanged: onLikeChanged),
-          Text('${Formatter.formatPrice(product.price)} 원', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+          LikeButton(productId: productId),
+          Text('${Formatter.formatPrice(product!.price)} 원', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
           ElevatedButton(
             onPressed: () {},
             style: ElevatedButton.styleFrom(

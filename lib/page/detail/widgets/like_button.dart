@@ -1,32 +1,27 @@
+import 'package:apple_market/provider/product_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LikeButton extends StatefulWidget {
-  final bool isLike;
-  final ValueChanged<bool> onLikeChanged;
-  const LikeButton({super.key, required this.isLike, required this.onLikeChanged});
+class LikeButton extends ConsumerStatefulWidget {
+  final int productId;
+
+  const LikeButton({super.key, required this.productId});
 
   @override
-  State<LikeButton> createState() => _LikeButtonState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _LikeButtonState();
 }
 
-class _LikeButtonState extends State<LikeButton> {
-  late bool _isLike;
-  @override
-  void initState() {
-    super.initState();
-    _isLike = widget.isLike;
-  }
-
+class _LikeButtonState extends ConsumerState<LikeButton> {
   @override
   Widget build(BuildContext context) {
+    final product = ref.watch(productByIdProvider(widget.productId));
+    final notifier = ref.read(productNotifierProvider.notifier);
+
     return IconButton(
       onPressed: () {
-        setState(() {
-          _isLike = !_isLike;
-          widget.onLikeChanged(_isLike);
-        });
+        notifier.changeProductLikeById(!product.isLike, widget.productId);
       },
-      icon: Icon(_isLike ? Icons.favorite : Icons.favorite_border, color: _isLike ? Colors.red : Colors.grey),
+      icon: Icon(product!.isLike ? Icons.favorite : Icons.favorite_border, color: product.isLike ? Colors.red : Colors.grey),
     );
   }
 }
