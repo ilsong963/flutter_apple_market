@@ -1,4 +1,4 @@
-import 'package:apple_market/page/main_page.dart';
+import 'package:apple_market/page/main/main_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
