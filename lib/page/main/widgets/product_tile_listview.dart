@@ -52,9 +52,14 @@ class _ProductTileListViewState extends State<ProductTileListView> {
           isLoading
               ? const Center(child: CircularProgressIndicator())
               : ListView.builder(
-                itemCount: products.length,
+                itemCount: products.length * 2 - 1,
                 itemBuilder: (context, index) {
-                  return ProductTile(product: products[index]);
+                  //홀수 일때 구분선 추가
+                  if (index.isOdd) {
+                    return Divider(color: Colors.grey, height: 20);
+                  }
+                  final productIndex = index ~/ 2;
+                  return ProductTile(product: products[productIndex]);
                 },
               ),
     );
