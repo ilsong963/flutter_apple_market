@@ -1,3 +1,4 @@
+import 'package:apple_market/page/detail/detail_page.dart';
 import 'package:apple_market/util/formatter.dart';
 import 'package:flutter/material.dart';
 import '../../../models/product.dart';
@@ -8,30 +9,33 @@ class ProductTile extends StatelessWidget {
   const ProductTile({super.key, required this.product});
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 140,
-      child: Card(
-        elevation: 3,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            productImage(),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    productName(),
-                    productAdress(),
-                    productPrice(),
-                    Spacer(),
-                    Row(mainAxisAlignment: MainAxisAlignment.end, children: [productChat(), const SizedBox(width: 8), productLike()]),
-                  ],
+    return GestureDetector(
+      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPage(product: product))),
+      child: SizedBox(
+        height: 140,
+        child: Card(
+          elevation: 3,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              productImage(),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      productName(),
+                      productAdress(),
+                      productPrice(),
+                      Spacer(),
+                      Row(mainAxisAlignment: MainAxisAlignment.end, children: [productChat(), const SizedBox(width: 8), productLike()]),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
